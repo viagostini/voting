@@ -3,6 +3,7 @@ package bbb.voting.controller;
 import bbb.voting.dto.VoteResponse;
 import bbb.voting.entity.VoteRecord;
 import bbb.voting.repository.VoteRecordRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 
 @RestController
 public class VotesController {
-    private VoteRecordRepository voteRecordRepository;
+    private final VoteRecordRepository voteRecordRepository;
 
     public VotesController(VoteRecordRepository voteRecordRepository) {
         this.voteRecordRepository = voteRecordRepository;
@@ -28,7 +29,7 @@ public class VotesController {
         voteRecordRepository.save(new VoteRecord(id, clientIpAddress, timestamp));
 
         VoteResponse response = new VoteResponse(clientIpAddress, timestamp, message);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/api/votes")

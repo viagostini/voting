@@ -20,10 +20,122 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 11378,
   "graphTooltip": 0,
-  "id": 2,
-  "links": [ ],
+  "id": 1,
+  "links": [],
   "liveNow": false,
   "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 122,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.95, sum by(le) (rate(scheduled.task.processPendingVotes_execution_time_seconds_bucket[5m])))",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "95th percentile",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.99, sum by(le) (rate(scheduled.task.processPendingVotes_execution_time_seconds_bucket[5m])))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "99th percentile",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Pending Votes Processing Time",
+      "type": "timeseries"
+    },
     {
       "collapsed": false,
       "datasource": {
@@ -34,10 +146,10 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 8
       },
       "id": 54,
-      "panels": [ ],
+      "panels": [],
       "targets": [
         {
           "datasource": {
@@ -87,16 +199,16 @@
           },
           "unit": "s"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 3,
         "w": 5,
         "x": 0,
-        "y": 1
+        "y": 9
       },
       "id": 52,
-      "links": [ ],
+      "links": [],
       "maxDataPoints": 100,
       "options": {
         "colorMode": "value",
@@ -112,7 +224,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.12",
+      "pluginVersion": "10.1.6",
       "targets": [
         {
           "datasource": {
@@ -174,16 +286,16 @@
           },
           "unit": "percent"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 6,
         "w": 5,
         "x": 5,
-        "y": 1
+        "y": 9
       },
       "id": 58,
-      "links": [ ],
+      "links": [],
       "maxDataPoints": 100,
       "options": {
         "orientation": "horizontal",
@@ -197,7 +309,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "9.5.12",
+      "pluginVersion": "10.1.6",
       "targets": [
         {
           "datasource": {
@@ -268,16 +380,16 @@
           },
           "unit": "percent"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 6,
         "w": 5,
         "x": 10,
-        "y": 1
+        "y": 9
       },
       "id": 60,
-      "links": [ ],
+      "links": [],
       "maxDataPoints": 100,
       "options": {
         "orientation": "horizontal",
@@ -291,7 +403,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "9.5.12",
+      "pluginVersion": "10.1.6",
       "targets": [
         {
           "datasource": {
@@ -310,7 +422,7 @@
       "type": "gauge"
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -320,9 +432,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -330,7 +442,7 @@
         "h": 6,
         "w": 9,
         "x": 15,
-        "y": 1
+        "y": 9
       },
       "hiddenSeries": false,
       "id": 66,
@@ -345,17 +457,17 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.5.12",
+      "pluginVersion": "10.1.6",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -383,8 +495,8 @@
           "refId": "B"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "Process Open Files",
       "tooltip": {
         "shared": true,
@@ -395,7 +507,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -449,16 +561,16 @@
           },
           "unit": "dateTimeAsIso"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 3,
         "w": 5,
         "x": 0,
-        "y": 4
+        "y": 12
       },
       "id": 56,
-      "links": [ ],
+      "links": [],
       "maxDataPoints": 100,
       "options": {
         "colorMode": "value",
@@ -474,7 +586,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.12",
+      "pluginVersion": "10.1.6",
       "targets": [
         {
           "datasource": {
@@ -494,7 +606,7 @@
       "type": "stat"
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -504,10 +616,10 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ],
+          "links": [],
           "unit": "percentunit"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -515,7 +627,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 7
+        "y": 15
       },
       "hiddenSeries": false,
       "id": 95,
@@ -531,17 +643,17 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.5.12",
+      "pluginVersion": "10.1.6",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -569,8 +681,8 @@
           "refId": "B"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "CPU Usage",
       "tooltip": {
         "shared": true,
@@ -581,7 +693,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -600,7 +712,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -610,9 +722,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -620,7 +732,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 7
+        "y": 15
       },
       "hiddenSeries": false,
       "id": 96,
@@ -636,17 +748,17 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.5.12",
+      "pluginVersion": "10.1.6",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -674,8 +786,8 @@
           "refId": "B"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "Load Average",
       "tooltip": {
         "shared": true,
@@ -686,7 +798,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -714,10 +826,10 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 22
       },
       "id": 48,
-      "panels": [ ],
+      "panels": [],
       "targets": [
         {
           "datasource": {
@@ -731,7 +843,7 @@
       "type": "row"
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -741,9 +853,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -751,7 +863,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 15
+        "y": 23
       },
       "hiddenSeries": false,
       "id": 85,
@@ -767,19 +879,19 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.5.12",
+      "pluginVersion": "10.1.6",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
       "repeat": "memory_pool_heap",
       "repeatDirection": "h",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -818,8 +930,8 @@
           "refId": "B"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "$memory_pool_heap (heap)",
       "tooltip": {
         "shared": true,
@@ -830,7 +942,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -849,7 +961,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -859,17 +971,17 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
-        "w": 6,
+        "w": 8,
         "x": 0,
-        "y": 23
+        "y": 31
       },
       "hiddenSeries": false,
       "id": 88,
@@ -885,19 +997,19 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "9.5.12",
+      "pluginVersion": "10.1.6",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
       "repeat": "memory_pool_nonheap",
       "repeatDirection": "h",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -936,8 +1048,8 @@
           "refId": "B"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "$memory_pool_nonheap (non-heap)",
       "tooltip": {
         "shared": true,
@@ -948,7 +1060,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -979,7 +1091,7 @@
         "y": 39
       },
       "id": 117,
-      "panels": [ ],
+      "panels": [],
       "targets": [
         {
           "datasource": {
@@ -993,7 +1105,7 @@
       "type": "row"
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1003,9 +1115,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1029,7 +1141,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -1039,7 +1151,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -1078,8 +1190,8 @@
           "refId": "C"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "Threads",
       "tooltip": {
         "shared": true,
@@ -1090,7 +1202,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -1109,7 +1221,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1119,9 +1231,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1144,7 +1256,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -1154,7 +1266,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -1182,8 +1294,8 @@
           "refId": "B"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "Memory Allocate/Promote",
       "tooltip": {
         "shared": true,
@@ -1194,7 +1306,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -1213,7 +1325,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1224,9 +1336,9 @@
       "decimals": 0,
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1250,7 +1362,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -1260,7 +1372,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -1277,8 +1389,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "Classes Loaded",
       "tooltip": {
         "shared": true,
@@ -1289,7 +1401,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -1310,7 +1422,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1320,9 +1432,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1345,7 +1457,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -1355,7 +1467,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -1372,8 +1484,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "Classes Unloaded",
       "tooltip": {
         "shared": true,
@@ -1384,7 +1496,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -1403,7 +1515,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1413,9 +1525,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1438,7 +1550,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -1448,7 +1560,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -1476,8 +1588,8 @@
           "refId": "B"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "Direct Buffers",
       "tooltip": {
         "shared": true,
@@ -1488,7 +1600,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -1507,7 +1619,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1517,9 +1629,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1542,7 +1654,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -1552,7 +1664,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -1580,8 +1692,8 @@
           "refId": "B"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "Mapped Buffers",
       "tooltip": {
         "shared": true,
@@ -1592,7 +1704,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -1623,7 +1735,7 @@
         "y": 61
       },
       "id": 72,
-      "panels": [ ],
+      "panels": [],
       "targets": [
         {
           "datasource": {
@@ -1637,7 +1749,7 @@
       "type": "row"
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1647,9 +1759,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1675,7 +1787,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -1685,7 +1797,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -1702,8 +1814,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "GC Count",
       "tooltip": {
         "shared": true,
@@ -1714,7 +1826,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -1733,7 +1845,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1743,9 +1855,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1771,7 +1883,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -1781,7 +1893,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -1798,8 +1910,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "GC Stop the World Duration",
       "tooltip": {
         "shared": true,
@@ -1810,7 +1922,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -1867,8 +1979,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1878,16 +1989,16 @@
               },
               "unit": "none"
             },
-            "overrides": [ ]
+            "overrides": []
           },
           "gridPos": {
             "h": 4,
             "w": 4,
             "x": 0,
-            "y": 18
+            "y": 26
           },
           "id": 44,
-          "links": [ ],
+          "links": [],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -1921,7 +2032,7 @@
           "type": "stat"
         },
         {
-          "aliasColors": { },
+          "aliasColors": {},
           "bars": false,
           "dashLength": 10,
           "dashes": false,
@@ -1931,9 +2042,9 @@
           },
           "fieldConfig": {
             "defaults": {
-              "links": [ ]
+              "links": []
             },
-            "overrides": [ ]
+            "overrides": []
           },
           "fill": 1,
           "fillGradient": 0,
@@ -1941,7 +2052,7 @@
             "h": 8,
             "w": 20,
             "x": 4,
-            "y": 18
+            "y": 26
           },
           "hiddenSeries": false,
           "id": 36,
@@ -1959,7 +2070,7 @@
           },
           "lines": true,
           "linewidth": 1,
-          "links": [ ],
+          "links": [],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -1969,7 +2080,7 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [ ],
+          "seriesOverrides": [],
           "spaceLength": 10,
           "stack": true,
           "steppedLine": false,
@@ -2008,8 +2119,8 @@
               "refId": "C"
             }
           ],
-          "thresholds": [ ],
-          "timeRegions": [ ],
+          "thresholds": [],
+          "timeRegions": [],
           "title": "Connections",
           "tooltip": {
             "shared": true,
@@ -2020,7 +2131,7 @@
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": [ ]
+            "values": []
           },
           "yaxes": [
             {
@@ -2063,8 +2174,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2074,16 +2184,16 @@
               },
               "unit": "none"
             },
-            "overrides": [ ]
+            "overrides": []
           },
           "gridPos": {
             "h": 4,
             "w": 4,
             "x": 0,
-            "y": 22
+            "y": 30
           },
           "id": 46,
-          "links": [ ],
+          "links": [],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -2117,7 +2227,7 @@
           "type": "stat"
         },
         {
-          "aliasColors": { },
+          "aliasColors": {},
           "bars": false,
           "dashLength": 10,
           "dashes": false,
@@ -2127,9 +2237,9 @@
           },
           "fieldConfig": {
             "defaults": {
-              "links": [ ]
+              "links": []
             },
-            "overrides": [ ]
+            "overrides": []
           },
           "fill": 1,
           "fillGradient": 0,
@@ -2137,7 +2247,7 @@
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 26
+            "y": 34
           },
           "hiddenSeries": false,
           "id": 38,
@@ -2152,7 +2262,7 @@
           },
           "lines": true,
           "linewidth": 1,
-          "links": [ ],
+          "links": [],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -2162,7 +2272,7 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [ ],
+          "seriesOverrides": [],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
@@ -2179,8 +2289,8 @@
               "refId": "A"
             }
           ],
-          "thresholds": [ ],
-          "timeRegions": [ ],
+          "thresholds": [],
+          "timeRegions": [],
           "title": "Connection Creation Time",
           "tooltip": {
             "shared": true,
@@ -2191,7 +2301,7 @@
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": [ ]
+            "values": []
           },
           "yaxes": [
             {
@@ -2210,7 +2320,7 @@
           }
         },
         {
-          "aliasColors": { },
+          "aliasColors": {},
           "bars": false,
           "dashLength": 10,
           "dashes": false,
@@ -2220,9 +2330,9 @@
           },
           "fieldConfig": {
             "defaults": {
-              "links": [ ]
+              "links": []
             },
-            "overrides": [ ]
+            "overrides": []
           },
           "fill": 1,
           "fillGradient": 0,
@@ -2230,7 +2340,7 @@
             "h": 6,
             "w": 8,
             "x": 8,
-            "y": 26
+            "y": 34
           },
           "hiddenSeries": false,
           "id": 42,
@@ -2245,7 +2355,7 @@
           },
           "lines": true,
           "linewidth": 1,
-          "links": [ ],
+          "links": [],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -2255,7 +2365,7 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [ ],
+          "seriesOverrides": [],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
@@ -2272,8 +2382,8 @@
               "refId": "A"
             }
           ],
-          "thresholds": [ ],
-          "timeRegions": [ ],
+          "thresholds": [],
+          "timeRegions": [],
           "title": "Connection Usage Time",
           "tooltip": {
             "shared": true,
@@ -2284,7 +2394,7 @@
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": [ ]
+            "values": []
           },
           "yaxes": [
             {
@@ -2303,7 +2413,7 @@
           }
         },
         {
-          "aliasColors": { },
+          "aliasColors": {},
           "bars": false,
           "dashLength": 10,
           "dashes": false,
@@ -2313,9 +2423,9 @@
           },
           "fieldConfig": {
             "defaults": {
-              "links": [ ]
+              "links": []
             },
-            "overrides": [ ]
+            "overrides": []
           },
           "fill": 1,
           "fillGradient": 0,
@@ -2323,7 +2433,7 @@
             "h": 6,
             "w": 8,
             "x": 16,
-            "y": 26
+            "y": 34
           },
           "hiddenSeries": false,
           "id": 40,
@@ -2338,7 +2448,7 @@
           },
           "lines": true,
           "linewidth": 1,
-          "links": [ ],
+          "links": [],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -2348,7 +2458,7 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [ ],
+          "seriesOverrides": [],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
@@ -2365,8 +2475,8 @@
               "refId": "A"
             }
           ],
-          "thresholds": [ ],
-          "timeRegions": [ ],
+          "thresholds": [],
+          "timeRegions": [],
           "title": "Connection Acquire Time",
           "tooltip": {
             "shared": true,
@@ -2377,7 +2487,7 @@
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": [ ]
+            "values": []
           },
           "yaxes": [
             {
@@ -2421,7 +2531,7 @@
         "y": 71
       },
       "id": 22,
-      "panels": [ ],
+      "panels": [],
       "targets": [
         {
           "datasource": {
@@ -2459,8 +2569,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2470,7 +2579,7 @@
           },
           "unit": "locale"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 4,
@@ -2479,7 +2588,7 @@
         "y": 72
       },
       "id": 101,
-      "links": [ ],
+      "links": [],
       "maxDataPoints": 100,
       "options": {
         "colorMode": "none",
@@ -2526,9 +2635,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -2551,7 +2660,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -2561,7 +2670,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -2611,8 +2720,8 @@
           "refId": "D"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "HTTP Codes",
       "tooltip": {
         "shared": true,
@@ -2623,7 +2732,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -2667,8 +2776,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2678,7 +2786,7 @@
           },
           "unit": "locale"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "gridPos": {
         "h": 4,
@@ -2687,7 +2795,7 @@
         "y": 76
       },
       "id": 32,
-      "links": [ ],
+      "links": [],
       "maxDataPoints": 100,
       "options": {
         "colorMode": "none",
@@ -2721,7 +2829,7 @@
       "type": "stat"
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -2731,10 +2839,10 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ],
+          "links": [],
           "unit": "reqps"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -2757,7 +2865,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -2767,7 +2875,7 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -2785,8 +2893,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "Requests/second",
       "tooltip": {
         "shared": true,
@@ -2797,7 +2905,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -2816,7 +2924,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -2826,10 +2934,10 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ],
+          "links": [],
           "unit": "s"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -2852,7 +2960,7 @@
       },
       "lines": true,
       "linewidth": 2,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -2862,7 +2970,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -2892,8 +3000,8 @@
           "refId": "B"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "Requests duration",
       "tooltip": {
         "shared": true,
@@ -2904,7 +3012,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -2923,7 +3031,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -2933,10 +3041,10 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ],
+          "links": [],
           "unit": "reqps"
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -2960,7 +3068,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -2970,7 +3078,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -2987,8 +3095,8 @@
           "refId": "D"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "TOP 10",
       "tooltip": {
         "shared": true,
@@ -2999,7 +3107,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -3018,7 +3126,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -3028,9 +3136,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -3054,7 +3162,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -3064,7 +3172,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -3114,8 +3222,8 @@
           "refId": "D"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "Threads",
       "tooltip": {
         "shared": true,
@@ -3126,7 +3234,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -3157,7 +3265,7 @@
         "y": 96
       },
       "id": 8,
-      "panels": [ ],
+      "panels": [],
       "targets": [
         {
           "datasource": {
@@ -3171,7 +3279,7 @@
       "type": "row"
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -3181,9 +3289,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -3207,7 +3315,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -3217,7 +3325,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -3236,8 +3344,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "INFO logs",
       "tooltip": {
         "shared": true,
@@ -3248,7 +3356,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -3267,7 +3375,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -3277,9 +3385,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -3303,7 +3411,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -3313,7 +3421,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -3332,8 +3440,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "ERROR logs",
       "tooltip": {
         "shared": true,
@@ -3344,7 +3452,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -3363,7 +3471,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -3373,9 +3481,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -3399,7 +3507,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -3409,7 +3517,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -3428,8 +3536,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "WARN logs",
       "tooltip": {
         "shared": true,
@@ -3440,7 +3548,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -3459,7 +3567,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -3469,9 +3577,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -3495,7 +3603,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -3505,7 +3613,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -3524,8 +3632,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "DEBUG logs",
       "tooltip": {
         "shared": true,
@@ -3536,7 +3644,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -3555,7 +3663,7 @@
       }
     },
     {
-      "aliasColors": { },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -3565,9 +3673,9 @@
       },
       "fieldConfig": {
         "defaults": {
-          "links": [ ]
+          "links": []
         },
-        "overrides": [ ]
+        "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
@@ -3591,7 +3699,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [ ],
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -3601,7 +3709,7 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [ ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -3620,8 +3728,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": [ ],
-      "timeRegions": [ ],
+      "thresholds": [],
+      "timeRegions": [],
       "title": "TRACE logs",
       "tooltip": {
         "shared": true,
@@ -3632,7 +3740,7 @@
       "xaxis": {
         "mode": "time",
         "show": true,
-        "values": [ ]
+        "values": []
       },
       "yaxes": [
         {
@@ -3654,7 +3762,7 @@
   "refresh": "5s",
   "schemaVersion": 38,
   "style": "dark",
-  "tags": [ ],
+  "tags": [],
   "templating": {
     "list": [
       {
@@ -3673,7 +3781,7 @@
         "label": "Application",
         "multi": false,
         "name": "application",
-        "options": [ ],
+        "options": [],
         "query": "label_values(application)",
         "refresh": 1,
         "regex": "",
@@ -3700,7 +3808,7 @@
         "label": "Instance",
         "multi": false,
         "name": "instance",
-        "options": [ ],
+        "options": [],
         "query": "label_values(jvm_classes_loaded_classes{application=\"$application\"}, instance)",
         "refresh": 1,
         "regex": "",
@@ -3713,7 +3821,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "HikariPool-1",
           "value": "HikariPool-1"
         },
@@ -3727,7 +3835,7 @@
         "label": "HikariCP-Pool",
         "multi": false,
         "name": "hikaricp",
-        "options": [ ],
+        "options": [],
         "query": "label_values(hikaricp_connections{instance=\"$instance\", application=\"$application\"}, pool)",
         "refresh": 1,
         "regex": "",
@@ -3740,7 +3848,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -3754,7 +3862,7 @@
         "label": "Memory Pool (heap)",
         "multi": false,
         "name": "memory_pool_heap",
-        "options": [ ],
+        "options": [],
         "query": "label_values(jvm_memory_used_bytes{application=\"$application\", instance=\"$instance\", area=\"heap\"},id)",
         "refresh": 1,
         "regex": "",
@@ -3781,7 +3889,7 @@
         "label": "Memory Pool (nonheap)",
         "multi": false,
         "name": "memory_pool_nonheap",
-        "options": [ ],
+        "options": [],
         "query": "label_values(jvm_memory_used_bytes{application=\"$application\", instance=\"$instance\", area=\"nonheap\"},id)",
         "refresh": 1,
         "regex": "",
@@ -3795,7 +3903,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -3826,6 +3934,6 @@
   "timezone": "",
   "title": "Spring Boot 2.1 System Monitor",
   "uid": "spring_boot_21",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }

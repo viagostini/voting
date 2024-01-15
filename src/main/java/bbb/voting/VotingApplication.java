@@ -5,11 +5,13 @@ import bbb.voting.repository.VotesRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.List;
 import java.util.logging.Logger;
 
 @SpringBootApplication
+@EnableScheduling
 public class VotingApplication implements CommandLineRunner {
 	private static final Logger logger = Logger.getLogger(VotingApplication.class.getName());
 

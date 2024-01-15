@@ -30,7 +30,7 @@ class VotesControllerTest {
     public void testVoteEndpoint() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/vote/1")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
+                .andExpect(status().isAccepted())
                 .andExpect(jsonPath("$.clientIpAddress").value("127.0.0.1"))
                 .andExpect(jsonPath("$.timestamp").isNotEmpty());
     }

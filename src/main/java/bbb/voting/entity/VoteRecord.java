@@ -12,6 +12,8 @@ public class VoteRecord {
 
     private Long candidateId;
 
+    private VoteRecordStatus status;
+
     private String clientIpAddress;
 
     private LocalDateTime timestamp;
@@ -21,6 +23,7 @@ public class VoteRecord {
 
    public VoteRecord(Long candidateId, String clientIpAddress, LocalDateTime timestamp) {
         this.candidateId = candidateId;
+        this.status = VoteRecordStatus.PENDING;
         this.clientIpAddress = clientIpAddress;
         this.timestamp = timestamp;
     }
@@ -39,5 +42,13 @@ public class VoteRecord {
 
     public LocalDateTime getTimestamp() {
         return timestamp;
+    }
+
+    public VoteRecordStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(VoteRecordStatus status) {
+        this.status = status;
     }
 }

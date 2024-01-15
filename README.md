@@ -6,7 +6,6 @@ The application is written in Java with Spring and is meant as an exercise for m
 **Objectives:**
 * Learn how to use Spring framework
 * Learn how to integrate DB with Spring
-* Learn how to integrate Message Queue with Spring
 
 **Requirements:**
 * For now, we will already start with a set of candidates ready for voting
