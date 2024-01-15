@@ -12,6 +12,7 @@ The application is written in Java with Spring and is meant as an exercise for m
 * For now, we will already start with a set of candidates ready for voting
 * Users must be able to vote for their favorite candidate on `/api/vote/{candidateId}` endpoint
 * Users must be able to see the current vote count for each candidate on `/api/vote` endpoint
+* Every vote must be logged for auditing purposes
 
 **Non-functional requirements:**
 * There will be high traffic on the voting endpoint
