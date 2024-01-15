@@ -1,4 +1,4 @@
-package bbb.voting;
+package bbb.voting.repository;
 
 import bbb.voting.entity.Votes;
 import org.springframework.data.repository.CrudRepository;
