@@ -1,5 +1,6 @@
 package bbb.voting.controller;
 
+import bbb.voting.repository.VoteRecordRepository;
 import bbb.voting.repository.VotesRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,16 @@ class VotesControllerTest {
     @MockBean
     private VotesRepository votesRepository;
 
+    @MockBean
+    private VoteRecordRepository voteRecordRepository;
+
     @Test
     public void testVoteEndpoint() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/vote/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.clientIpAddress").value("127.0.0.1"))
-                .andExpect(jsonPath("$.timestamp").exists());
+                .andExpect(jsonPath("$.timestamp").isNotEmpty());
     }
 
 }
