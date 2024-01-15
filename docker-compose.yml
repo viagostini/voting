@@ -1,4 +1,12 @@
 services:
+  postgres:
+    image: 'postgres:16.1'
+    environment:
+      - 'POSTGRES_DB=voting'
+      - 'POSTGRES_USER=admin'
+      - 'POSTGRES_PASSWORD=admin'
+    ports:
+      - '5432:5432'
   prometheus:
     image: 'prom/prometheus:v2.48.1'
     container_name: 'prometheus'
