@@ -6,6 +6,8 @@ import bbb.voting.entity.Votes;
 import bbb.voting.repository.VoteRecordRepository;
 import bbb.voting.repository.VotesRepository;
 import io.micrometer.core.annotation.Timed;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import jakarta.transaction.Transactional;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -21,9 +23,14 @@ public class VoteRecordProcessorService {
     private final VotesRepository votesRepository;
     private final VoteRecordRepository voteRecordRepository;
 
-    public VoteRecordProcessorService(VotesRepository votesRepository, VoteRecordRepository voteRecordRepository) {
+    private final Counter processedVotesCounter;
+
+    public VoteRecordProcessorService(VotesRepository votesRepository, VoteRecordRepository voteRecordRepository, MeterRegistry meterRegistry) {
         this.votesRepository = votesRepository;
         this.voteRecordRepository = voteRecordRepository;
+        this.processedVotesCounter = Counter.builder("scheduled.task.processPendingVotes.processedVotes")
+            .description("Number of processed votes")
+            .register(meterRegistry);
     }
 
     @Scheduled(fixedRate = 10, timeUnit = TimeUnit.SECONDS)
@@ -46,6 +53,7 @@ public class VoteRecordProcessorService {
         }
 
         if (!pendingVotes.isEmpty()) {
+            processedVotesCounter.increment(pendingVotes.size());
             logger.info("Processed " + pendingVotes.size() + " pending votes");
         }
     }
