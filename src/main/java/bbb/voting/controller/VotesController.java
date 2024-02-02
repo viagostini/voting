@@ -32,7 +32,7 @@ public class VotesController {
 
     @GetMapping("/{id}")
     public ResponseEntity<VoteResponse> vote(@PathVariable Long id) {
-        String clientIpAddress = getClientAddress();
+        String clientIpAddress = getClientIpAddress();
         LocalDateTime timestamp = LocalDateTime.now();
 
         Optional<String> candidateName = votesRepository.findById(id).map(Votes::getName);
@@ -51,7 +51,7 @@ public class VotesController {
         return ResponseEntity.accepted().body(response);
     }
 
-    private String getClientAddress() {
+    private String getClientIpAddress() {
         // Placeholder for a real implementation
         return "127.0.0.1";
     }
