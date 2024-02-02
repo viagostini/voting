@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/vote")
@@ -34,18 +35,18 @@ public class VotesController {
         String clientIpAddress = getClientAddress();
         LocalDateTime timestamp = LocalDateTime.now();
 
-        boolean candidateExists = votesRepository.existsById(id);
+        Optional<String> candidateName = votesRepository.findById(id).map(Votes::getName);
 
-        if (!candidateExists) {
+        if (candidateName.isEmpty()) {
             String message = "Candidate with id " + id + " does not exist";
             VoteResponse response = new VoteResponse(clientIpAddress, timestamp, message);
             return ResponseEntity.badRequest().body(response);
         }
 
-        String message = "Vote for " + id + " registered";
+        VoteRecord voteRecord = new VoteRecord(id, clientIpAddress, timestamp);
+        voteRecordRepository.save(voteRecord);
 
-        voteRecordRepository.save(new VoteRecord(id, clientIpAddress, timestamp));
-
+        String message = "Vote for " + candidateName.get() + " registered";
         VoteResponse response = new VoteResponse(clientIpAddress, timestamp, message);
         return ResponseEntity.accepted().body(response);
     }
