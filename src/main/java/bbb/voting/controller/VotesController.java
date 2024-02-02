@@ -5,7 +5,6 @@ import bbb.voting.entity.VoteRecord;
 import bbb.voting.entity.Votes;
 import bbb.voting.repository.VoteRecordRepository;
 import bbb.voting.repository.VotesRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,12 +33,21 @@ public class VotesController {
     public ResponseEntity<VoteResponse> vote(@PathVariable Long id) {
         String clientIpAddress = getClientAddress();
         LocalDateTime timestamp = LocalDateTime.now();
+
+        boolean candidateExists = votesRepository.existsById(id);
+
+        if (!candidateExists) {
+            String message = "Candidate with id " + id + " does not exist";
+            VoteResponse response = new VoteResponse(clientIpAddress, timestamp, message);
+            return ResponseEntity.badRequest().body(response);
+        }
+
         String message = "Vote for " + id + " registered";
 
         voteRecordRepository.save(new VoteRecord(id, clientIpAddress, timestamp));
 
         VoteResponse response = new VoteResponse(clientIpAddress, timestamp, message);
-        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+        return ResponseEntity.accepted().body(response);
     }
 
     private String getClientAddress() {
