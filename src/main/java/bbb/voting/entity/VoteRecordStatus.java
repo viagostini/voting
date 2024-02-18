@@ -1,16 +1,12 @@
 package bbb.voting.entity;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
 public enum VoteRecordStatus {
-    PENDING("PENDING"),
-    PROCESSED("PROCESSED");
+    PENDING("PENDING"), PROCESSED("PROCESSED");
 
     private final String status;
-
-    VoteRecordStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
 }

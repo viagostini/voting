@@ -1,25 +1,22 @@
 package bbb.voting;
 
-import bbb.voting.entity.Votes;
-import bbb.voting.repository.VotesRepository;
+import bbb.voting.entity.Candidate;
+import bbb.voting.repository.CandidateRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.List;
-import java.util.logging.Logger;
 
-@SpringBootApplication
+@Slf4j
 @EnableScheduling
+@SpringBootApplication
+@RequiredArgsConstructor
 public class VotingApplication implements CommandLineRunner {
-	private static final Logger logger = Logger.getLogger(VotingApplication.class.getName());
-
-	private final VotesRepository votesRepository;
-
-	public VotingApplication(VotesRepository votesRepository) {
-		this.votesRepository = votesRepository;
-	}
+	private final CandidateRepository candidateRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(VotingApplication.class, args);
@@ -27,15 +24,15 @@ public class VotingApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		Votes votes = new Votes("Superman", 0L);
-		Votes votes2 = new Votes("Batman", 0L);
-		Votes votes3 = new Votes("Spider-man", 0L);
+		Candidate candidate = new Candidate("Superman");
+		Candidate candidate2 = new Candidate("Batman");
+		Candidate candidate3 = new Candidate("Spider-Man");
 
-		votesRepository.saveAll(List.of(votes, votes2, votes3));
+		candidateRepository.saveAll(List.of(candidate, candidate2, candidate3));
 
-		logger.info("Votes:");
-		for (Votes v : votesRepository.findAll()) {
-			logger.info(v.getId() + ": " + v.getName() + " - " + v.getVotes() + " votes");
+		log.info("Votes:");
+		for (Candidate c : candidateRepository.findAll()) {
+			log.info(c.getId() + ": " + c.getName() + " - " + c.getVotes() + " votes");
 		}
 	}
 }
